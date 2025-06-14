@@ -9,7 +9,7 @@
     <!-- PWA Manifest -->
     <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiU3Vydml2YWwgUHJlcGFyZWRuZXNzIFF1aXoiLCJzaG9ydF9uYW1lIjoiU3Vydml2YWwgUXVpeiIsImRlc2NyaXB0aW9uIjoiVGVzdCB5b3VyIHN1cnZpdmFsIHByZXBhcmVkbmVzcyIsInN0YXJ0X3VybCI6Ii8iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMmQ1MDE2IiwidGhlbWVfY29sb3IiOiIjMmQ1MDE2IiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owcFlXaDBlSEE2THk5M2QzY3Vjekl1YjNKbkx6SXdNREF2YzJkbklpQjNhV1IwYUQwaU1USXdJaUJvWldsbmFIUTlJakV5TUNJS1BFNWxkM05pY0dGalpYTWdhV1IlM0RJaUJoTFMxcklURXRhMGRMYTFGRE1VNXFiM2RyZUZaUWRHSnJkSGxaY0U0eWJrcHBWR051Y1VzclJ6WjJSaWQwVVZkUklpQm9SamxRSWlBQWV3PT0iLCJzaXplcyI6IjEyOHgxMjgiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
     
-    <style>
+<style>
         * {
             margin: 0;
             padding: 0;
@@ -34,17 +34,90 @@
             text-align: center;
             margin-bottom: 30px;
             color: white;
+            padding: 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .title-section {
+            text-align: left;
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            font-weight: 700;
         }
 
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .subtitle {
+            font-size: 1.3rem;
+            margin: 8px 0 0 0;
+            opacity: 0.95;
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 2px solid rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-button:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.8);
+        }
+
+        .nav-button.active {
+            background: rgba(255,255,255,0.2);
+            border-color: #7dae42;
+            box-shadow: 0 0 0 2px rgba(125, 174, 66, 0.3);
+        }
+
+        .bonus-button {
+            border-color: #ffc107 !important;
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.3), rgba(255, 140, 0, 0.3)) !important;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4) !important;
+            animation: bonusPulse 2s infinite;
+        }
+
+        .bonus-button:hover {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.5), rgba(255, 140, 0, 0.5)) !important;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.6) !important;
+        }
+
+        @keyframes bonusPulse {
+            0%, 100% { 
+                box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+            }
+            50% { 
+                box-shadow: 0 4px 20px rgba(255, 193, 7, 0.7);
+            }
         }
 
         .main-menu {
@@ -298,13 +371,43 @@
             background: white;
         }
 
+        nav a[href*="drive.google.com"]:hover {
+            background: linear-gradient(135deg, #ff8c00, #ffc107) !important;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5) !important;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 16px;
             }
             
+            .logo-section {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .title-section {
+                text-align: center;
+            }
+            
             .header h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .main-nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            .nav-button {
+                width: 200px;
+                text-align: center;
             }
             
             .quiz-container {
@@ -315,41 +418,25 @@
                 flex-direction: column;
             }
         }
-        nav a:hover {
-    background: rgba(255,255,255,0.2);
-    transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-    nav {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-    }
-    
-    nav a {
-        margin: 0 !important;
-    }
-}
-        nav a[href*="drive.google.com"]:hover {
-    background: linear-gradient(135deg, #ff8c00, #ffc107) !important;
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5) !important;
-}
     </style>
+    
 </head>
 <body>
     <div class="container">
 <div class="header">
-    <h1><img src="./images/logo.png" alt="Survival Quiz Logo" style="width: 120px; height: 120px; vertical-align: middle; margin-right: 16px;">Survival Quiz</h1>
-    <p>Test your survival preparedness</p>
-<nav style="margin-top: 20px;">
-    <a href="index.html" style="color: white; text-decoration: none; margin: 0 12px; padding: 8px 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 25px; transition: all 0.3s ease;">🏠 Quiz</a>
-    <a href="books.html" style="color: white; text-decoration: none; margin: 0 12px; padding: 8px 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 25px; transition: all 0.3s ease;">📚 Books</a>
-    <a href="author.html" style="color: white; text-decoration: none; margin: 0 12px; padding: 8px 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 25px; transition: all 0.3s ease;">👨‍🏫 Author</a>
-    <a href="https://drive.google.com/drive/folders/1hyWXvyBfIhCXjrHM2ECTJNbbe-u2Pm_D?usp=sharing" target="_blank" style="color: white; text-decoration: none; margin: 0 12px; padding: 8px 16px; border: 2px solid #ffc107; background: linear-gradient(135deg, #ffc107, #ff8c00); border-radius: 25px; transition: all 0.3s ease; font-weight: 600; box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);">🎁 20+ Bonuses</a>
-</nav>
+    <div class="logo-section">
+        <img src="./images/logo.png" alt="Survival Quiz Logo" style="width: 120px; height: 120px;">
+        <div class="title-section">
+            <h1>Survival Quiz</h1>
+            <p class="subtitle">Test your survival preparedness</p>
+        </div>
+    </div>
+    <nav class="main-nav">
+        <a href="index.html" class="nav-button active">🏠 Quiz</a>
+        <a href="books.html" class="nav-button">📚 Books</a>
+        <a href="author.html" class="nav-button">👨‍🏫 Author</a>
+        <a href="https://drive.google.com/drive/folders/1hyWXvyBfIhCXjrHM2ECTJNbbe-u2Pm_D?usp=sharing" target="_blank" class="nav-button bonus-button">🎁 20+ Bonuses</a>
+    </nav>
 </div>
 
         <div id="mainMenu" class="main-menu">
