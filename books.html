@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2d5016">
+    <title>Survival Books - Essential Reading Collection</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c59 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .page-title {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .page-title h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            border-color: #7dae42;
+        }
+
+        .book-content {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .book-cover {
+            flex-shrink: 0;
+            width: 120px;
+            height: 160px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            object-fit: cover;
+        }
+
+        .book-info {
+            flex: 1;
+        }
+
+        .book-title {
+            color: #2d5016;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .book-description {
+            color: #666;
+            margin-bottom: 16px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .difficulty-indicator {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+
+        .difficulty-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #e0e0e0;
+        }
+
+        .difficulty-dot.active {
+            background: #7dae42;
+        }
+
+        .difficulty-text {
+            margin-left: 8px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .book-features {
+            margin-bottom: 16px;
+        }
+
+        .feature {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .buy-button {
+            background: linear-gradient(135deg, #7dae42 0%, #5d8234 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .buy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(125, 174, 66, 0.4);
+        }
+
+        .price {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .bundle-section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-top: 40px;
+            border: 3px solid #17a2b8;
+        }
+
+        .bundle-title {
+            color: #2d5016;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .bundle-covers {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .bundle-cover {
+            width: 100px;
+            height: 133px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            object-fit: cover;
+        }
+
+        .bundle-price {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin: 20px 0;
+            font-size: 1.2rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .bundle-buy-button {
+            background: linear-gradient(135deg, #17a2b8, #007bff);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(23, 162, 184, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .bundle-buy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(23, 162, 184, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            
+            nav a {
+                margin: 0 !important;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .book-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .bundle-covers {
+                flex-wrap: wrap;
+            }
+            
+            .bundle-price {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><img src="./images/logo.png" alt="Survival Quiz Logo" style="width: 120px; height: 120px; vertical-align: middle; margin-right: 16px;">Survival Quiz</h1>
+            <p>Test your survival preparedness</p>
+            <nav>
+                <a href="index.html">🏠 Quiz</a>
+                <a href="books.html" class="active">📚 Books</a>
+                <a href="author.html">👨‍🏫 Author</a>
+            </nav>
+        </div>
+
+        <div class="page-title">
+            <h2>📚 Essential Survival Library</h2>
+            <p>Master survival skills with these comprehensive guides</p>
+        </div>
+
+        <div class="books-grid">
+            <!-- Basic Survival Skills Book -->
+            <div class="book-card">
+                <div class="book-content">
+                    <img src="./images/basic-survival-cover.jpg" alt="Basic Survival Skills Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h3 class="book-title">🎒 Basic Survival Skills</h3>
+                        <p class="book-description">
+                            Master the fundamentals of preparedness: survival mindset, essential first aid, emergency communication, and physical fitness for any crisis situation.
+                        </p>
+                        <div class="difficulty-indicator">
+                            <div class="difficulty-dot active"></div>
+                            <div class="difficulty-dot active"></div>
+                            <div class="difficulty-dot"></div>
+                            <span class="difficulty-text">Beginner-Intermediate</span>
+                        </div>
+                        <div class="book-features">
+                            <div class="feature">✓ Emergency preparedness mindset</div>
+                            <div class="feature">✓ First aid essentials</div>
+                            <div class="feature">✓ Communication strategies</div>
+                            <div class="feature">✓ Physical fitness protocols</div>
+                        </div>
+                        <div class="book-actions">
+                            <a href="BASIC_BOOK_LINK_PLACEHOLDER" class="buy-button">📖 Get This Book</a>
+                            <span class="price">$19.99</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Off-Grid Survival Book -->
+            <div class="book-card">
+                <div class="book-content">
+                    <img src="./images/offgrid-survival-cover.jpg" alt="Off-Grid Survival Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h3 class="book-title">🔥 Life Without Electricity</h3>
+                        <p class="book-description">
+                            Learn practical skills for living off-grid: shelter construction, fire making, water purification, food procurement, and tool crafting without modern conveniences.
+                        </p>
+                        <div class="difficulty-indicator">
+                            <div class="difficulty-dot active"></div>
+                            <div class="difficulty-dot active"></div>
+                            <div class="difficulty-dot active"></div>
+                            <span class="difficulty-text">Intermediate-Advanced</span>
+                        </div>
+                        <div class="book-features">
+                            <div class="feature">✓ Shelter building techniques</div>
+                            <div class="feature">✓ Fire making mastery</div>
+                            <div class="feature">✓ Water procurement & purification</div>
+                            <div class="feature">✓ Tool crafting & food procurement</div>
+                        </div>
+                        <div class="book-actions">
+                            <a href="OFFGRID_BOOK_LINK_PLACEHOLDER" class="buy-button">📖 Get This Book</a>
+                            <span class="price">$22.99</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wilderness Medicine Book -->
+            <div class="book-card">
+                <div class="book-content">
+                    <img src="./images/medical-survival-cover.jpg" alt="Wilderness Medicine Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h3 class="book-title">🏥 Wilderness Medicine</h3>
+                        <p class="book-description">
+                            Essential medical skills for extreme conditions: trauma care, emergency procedures, natural remedies, and life-saving techniques when hospitals are unreachable.
+                        </p>
+                        <div class="difficulty-indicator">
+                            <div class="difficulty-dot active"></div>
+                            <div class="difficulty-dot active"></div>
+                            <div class="difficulty-dot active"></div>
+                            <span class="difficulty-text">Intermediate-Advanced</span>
+                        </div>
+                        <div class="book-features">
+                            <div class="feature">✓ Emergency trauma care</div>
+                            <div class="feature">✓ Wilderness first aid</div>
+                            <div class="feature">✓ Natural medicine remedies</div>
+                            <div class="feature">✓ Life-saving procedures</div>
+                        </div>
+                        <div class="book-actions">
+                            <a href="MEDICAL_BOOK_LINK_PLACEHOLDER" class="buy-button">📖 Get This Book</a>
+                            <span class="price">$24.99</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bundle Section -->
+        <div class="bundle-section">
+            <h3 class="bundle-title">💡 Complete Survival Mastery Collection</h3>
+            <p style="color: #666; margin-bottom: 20px; font-size: 1.1rem;">
+                Get all three books for comprehensive survival knowledge across every scenario!
+            </p>
+            
+            <div class="bundle-covers">
+                <img src="./images/basic-survival-cover.jpg" alt="Basic Book" class="bundle-cover">
+                <img src="./images/offgrid-survival-cover.jpg" alt="Off-Grid Book" class="bundle-cover">
+                <img src="./images/medical-survival-cover.jpg" alt="Medical Book" class="bundle-cover">
+            </div>
+            
+            <div class="bundle-price">
+                <span class="original-price">Individual Price: $67.97</span>
+                <span style="color: #28a745; font-weight: bold; font-size: 1.3rem;">Bundle Price: $49.99</span>
+                <span style="background: #dc3545; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Save $17.98!</span>
+            </div>
+            
+            <a href="ALL_BOOKS_LINK_PLACEHOLDER" class="bundle-buy-button">
+                📚 Get Complete Collection
+            </a>
+            
+            <div style="margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 12px; border-left: 4px solid #7dae42;">
+                <h4 style="color: #2d5016; margin-bottom: 12px;">🎯 What You'll Master:</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; text-align: left;">
+                    <div>
+                        <strong style="color: #2d5016;">Mental Preparedness</strong>
+                        <ul style="margin: 8px 0; padding-left: 20px; color: #666;">
+                            <li>Survival mindset</li>
+                            <li>Stress management</li>
+                            <li>Decision making</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="color: #2d5016;">Practical Skills</strong>
+                        <ul style="margin: 8px 0; padding-left: 20px; color: #666;">
+                            <li>Shelter & fire</li>
+                            <li>Water & food</li>
+                            <li>Tool making</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="color: #2d5016;">Medical Knowledge</strong>
+                        <ul style="margin: 8px 0; padding-left: 20px; color: #666;">
+                            <li>Trauma care</li>
+                            <li>Emergency procedures</li>
+                            <li>Natural remedies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
