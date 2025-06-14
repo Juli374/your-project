@@ -315,14 +315,36 @@
                 flex-direction: column;
             }
         }
+        nav a:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    nav a {
+        margin: 0 !important;
+    }
+}
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1><img src="./images/logo.png" alt="Survival Quiz Logo" style="width: 120px; height: 120px; vertical-align: middle; margin-right: 16px;">Survival Quiz</h1>
-            <p>Test your survival preparedness</p>
-        </div>
+<div class="header">
+    <h1><img src="./images/logo.png" alt="Survival Quiz Logo" style="width: 120px; height: 120px; vertical-align: middle; margin-right: 16px;">Survival Quiz</h1>
+    <p>Test your survival preparedness</p>
+    <nav style="margin-top: 20px;">
+        <a href="index.html" style="color: white; text-decoration: none; margin: 0 15px; padding: 8px 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 25px; transition: all 0.3s ease;">🏠 Quiz</a>
+        <a href="books.html" style="color: white; text-decoration: none; margin: 0 15px; padding: 8px 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 25px; transition: all 0.3s ease;">📚 Books</a>
+        <a href="author.html" style="color: white; text-decoration: none; margin: 0 15px; padding: 8px 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 25px; transition: all 0.3s ease;">👨‍🏫 Author</a>
+    </nav>
+</div>
 
         <div id="mainMenu" class="main-menu">
             <div class="book-card" onclick="startQuiz('all')">
